@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forever & Always | Slide 5</title>
+    <meta name="description" content="Happy Boyfriend's Day digital scrapbook">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♡</text></svg>">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Scrapbook Transition Overlay -->
+    <div class="page-overlay"></div>
+
+    <!-- Subtle Floating Background Stars -->
+    <div id="floating-decorations" aria-hidden="true"></div>
+
+    <!-- Music Control Button -->
+    <button id="music-btn" title="Toggle Music" aria-label="Toggle background music">
+        <span class="music-icon">♫</span>
+    </button>
+    <audio id="bg-music" loop preload="auto">
+        <source src="assets/music/themetro.mp3" type="audio/mpeg">
+        <source src="assets/song.mp3" type="audio/mpeg">
+        <source src="assets/music/song.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Page Progress Badge -->
+    <div class="progress-badge" aria-label="Page progress">
+        5 / 7
+    </div>
+
+    <!-- Sparkle Container -->
+    <div id="sparkle-container" aria-hidden="true"></div>
+
+    <!-- Main Content Container -->
+    <div class="page-container">
+        <main class="slide5-container">
+
+            <!-- Soft Pulsing Handmade SVG Heart Illustration -->
+            <div class="custom-heart-icon anim-fade-up stagger-1" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            </div>
+
+            <h1 class="final-heading anim-fade-up stagger-2">
+                Thank you for choosing me<br>
+            </h1>
+
+            <h2 class="final-subheading anim-fade-up stagger-3">
+                
+            </h2>
+
+            <div class="final-message anim-fade-up stagger-4">
+                <p>Every memory with you is something I want to keep forever.</p>
+                <p style="margin-top: 0.4rem; font-weight: 500; color: var(--rose);">
+                    Here's to us, to all the laughs, all the crazy moments, and all the memories still waiting for us.
+                </p>
+            </div>
+
+            <!-- Staggered Floating Polaroid Grid -->
+            <div class="final-photos-grid">
+                <div class="polaroid final-photo float-polaroid-1" style="--rot: -4deg;">
+                    <div class="tape top-left"></div>
+                    <img src="assets/photos/photo12.jpeg" alt="Memory 1" onerror="this.src='https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80'">
+                    <div class="caption">forever</div>
+                </div>
+
+                <div class="polaroid final-photo float-polaroid-2" style="--rot: 3deg;">
+                    <div class="tape top-center"></div>
+                    <img src="assets/photos/photo13.jpeg" alt="Memory 2" onerror="this.src='https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=600&q=80'">
+                    <div class="caption">always</div>
+                </div>
+
+                <div class="polaroid final-photo float-polaroid-3" style="--rot: -2deg;">
+                    <div class="tape top-right"></div>
+                    <img src="assets/photos/photo14.jpeg" alt="Memory 3" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80'">
+                    <div class="caption">together</div>
+                </div>
+
+                <div class="polaroid final-photo float-polaroid-4" style="--rot: 5deg;">
+                    <div class="tape top-center"></div>
+                    <img src="assets/photos/photo15.jpeg" alt="Memory 4" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80'">
+                    <div class="caption">my love</div>
+                </div>
+            </div>
+
+            <!-- Made with love Footer -->
+            <div class="made-with-love anim-fade-up stagger-5">
+                Made with love 🤍
+            </div>
+
+            <!-- Navigate to slide 6 -->
+            <div style="margin-top: 2rem;" class="anim-fade-up stagger-6">
+                <a href="slide6.html" class="next-btn">next &gt;&gt;</a>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

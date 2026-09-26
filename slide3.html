@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Letter | Slide 3</title>
+    <meta name="description" content="Happy Boyfriend's Day digital scrapbook">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♡</text></svg>">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Scrapbook Transition Overlay -->
+    <div class="page-overlay"></div>
+
+    <!-- Subtle Floating Background Stars -->
+    <div id="floating-decorations" aria-hidden="true"></div>
+
+    <!-- Music Control Button -->
+    <button id="music-btn" title="Toggle Music" aria-label="Toggle background music">
+        <span class="music-icon">♫</span>
+    </button>
+    <audio id="bg-music" loop preload="auto">
+        <source src="assets/music/themetro.mp3" type="audio/mpeg">
+        <source src="assets/song.mp3" type="audio/mpeg">
+        <source src="assets/music/song.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Page Progress Badge -->
+    <div class="progress-badge" aria-label="Page progress">
+        3 / 7
+    </div>
+
+    <!-- Sparkle Container -->
+    <div id="sparkle-container" aria-hidden="true"></div>
+
+    <!-- Main Content Container -->
+    <div class="page-container">
+        <main class="slide3-container">
+
+            <!-- Left Column: Staggered Floating Photo Collage -->
+            <div class="collage-grid">
+                <!-- Photo 1 -->
+                <div class="polaroid collage-photo cp1 float-polaroid-1 photo-fade photo-fade-1">
+                    <div class="tape top-center"></div>
+                    <img src="assets/photos/photo2.jpeg" alt="Photo 1" onerror="this.src='https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80'">
+                    <div class="caption">sweet memories</div>
+                </div>
+
+                <!-- Photo 2 -->
+                <div class="polaroid collage-photo cp2 float-polaroid-2 photo-fade photo-fade-2">
+                    <div class="tape top-right"></div>
+                    <img src="assets/photos/photo3.jpeg" alt="Photo 2" onerror="this.src='https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=600&q=80'">
+                    <div class="caption">first pic</div>
+                </div>
+
+                <!-- Photo 3 -->
+                <div class="polaroid collage-photo cp3 float-polaroid-3 photo-fade photo-fade-3">
+                    <div class="tape top-left"></div>
+                    <img src="assets/photos/photo4.jpeg" alt="Photo 3" onerror="this.src='https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=600&q=80'">
+                    <div class="caption">us always</div>
+                </div>
+
+                <!-- Photo 4 -->
+                <div class="polaroid collage-photo cp4 float-polaroid-4 photo-fade photo-fade-4">
+                    <div class="tape top-center"></div>
+                    <img src="assets/photos/photo5.jpeg" alt="Photo 4" onerror="this.src='https://images.unsplash.com/photo-1494774157365-9e04c6720e47?auto=format&fit=crop&w=600&q=80'">
+                    <div class="caption">my safe place</div>
+                </div>
+            </div>
+
+            <!-- Right Column: Romantic Handwritten Letter Reveal -->
+            <div class="letter-paper anim-fade-up stagger-1">
+                <div class="wax-seal" style="top: 18px; right: 18px;">
+                    <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                </div>
+                
+                <h1 class="letter-title anim-fade-up stagger-2">To My Favourite Human</h1>
+
+                <div class="letter-body">
+                    <p class="anim-fade-up stagger-3">Happy Boyfriend's Day, love.</p>
+
+                    <p class="anim-fade-up stagger-4">Thank you so much da, en vaazhkaila vandhu en boyfriend ah irukadhuku 😚. Inaiku unnoda special naal, adhum naa inno konjam extra va miss panren 😭</p>
+
+                    <p class="anim-fade-up stagger-5">Nee panra little things laam enaku rombave pudikum, the way you make me laugh, the way you care for me, apro ellamey.</p>
+
+                    <p class="anim-fade-up stagger-6">You've become such a beautiful part of my life, and I'm grateful for every conversation, every laugh, and every moment we spent together.</p>
+
+                    <p class="letter-signature anim-fade-up stagger-7">You're my safe place.<br>Loveee youuu 🤍</p>
+                </div>
+
+                <!-- Standard HTML Anchor Link Navigation -->
+                <div style="text-align: right; margin-top: 1rem;" class="anim-fade-up stagger-8">
+                    <a href="slide4.html" class="next-btn">next &gt;&gt;</a>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

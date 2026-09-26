@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery | Slide 4</title>
+    <meta name="description" content="Happy Boyfriend's Day digital scrapbook">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♡</text></svg>">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Scrapbook Transition Overlay -->
+    <div class="page-overlay"></div>
+
+    <!-- Subtle Floating Background Stars -->
+    <div id="floating-decorations" aria-hidden="true"></div>
+
+    <!-- Music Control Button -->
+    <button id="music-btn" title="Toggle Music" aria-label="Toggle background music">
+        <span class="music-icon">♫</span>
+    </button>
+    <audio id="bg-music" loop preload="auto">
+        <source src="assets/music/themetro.mp3" type="audio/mpeg">
+        <source src="assets/song.mp3" type="audio/mpeg">
+        <source src="assets/music/song.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Page Progress Badge -->
+    <div class="progress-badge" aria-label="Page progress">
+        4 / 7
+    </div>
+
+    <!-- Sparkle Container -->
+    <div id="sparkle-container" aria-hidden="true"></div>
+
+    <!-- Main Content Container -->
+    <div class="page-container">
+        <main class="slide4-container">
+
+            <!-- Center Typography -->
+            <div class="gallery-center-text anim-fade-up stagger-1">
+                <span class="word-youre">You</span>
+                <span class="word-my">are</span>
+                <span class="word-fav">my</span>
+                <span class="word-person">home !</span>
+            </div>
+
+            <!-- Surrounding Floating Polaroid Scatter -->
+            <div class="gallery-scatter">
+                <!-- Photo 1 -->
+                <div class="polaroid gp-photo gp1 float-polaroid-1 photo-fade photo-fade-1">
+                    <div class="tape top-left"></div>
+                    <img src="assets/photos/photo6.jpeg" alt="Gallery Photo 1" onerror="this.src='https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80'">
+                    <div class="caption">temple date</div>
+                </div>
+
+                <!-- Photo 2 -->
+                <div class="polaroid gp-photo gp2 float-polaroid-2 photo-fade photo-fade-2">
+                    <div class="tape top-right"></div>
+                    <img src="assets/photos/photo7.jpeg" alt="Gallery Photo 2" onerror="this.src='https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=600&q=80'">
+                    <div class="caption">another fav</div>
+                </div>
+
+                <!-- Photo 3 -->
+                <div class="polaroid gp-photo gp3 float-polaroid-3 photo-fade photo-fade-3">
+                    <div class="tape top-center"></div>
+                    <img src="assets/photos/photo8.jpeg" alt="Gallery Photo 3" onerror="this.src='https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=600&q=80'">
+                    <div class="caption">your bday</div>
+                </div>
+
+                <!-- Photo 4 -->
+                <div class="polaroid gp-photo gp4 float-polaroid-4 photo-fade photo-fade-4">
+                    <div class="tape top-left"></div>
+                    <img src="assets/photos/photo9.jpeg" alt="Gallery Photo 4" onerror="this.src='https://images.unsplash.com/photo-1494774157365-9e04c6720e47?auto=format&fit=crop&w=600&q=80'">
+                    <div class="caption">happy days</div>
+                </div>
+
+                <!-- Photo 5 -->
+                <div class="polaroid gp-photo gp5 float-polaroid-5 photo-fade photo-fade-5">
+                    <div class="tape top-right"></div>
+                    <img src="assets/photos/photo10.jpeg" alt="Gallery Photo 5" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80'">
+                    <div class="caption">bike date</div>
+                </div>
+
+                <!-- Photo 6 -->
+                <div class="polaroid gp-photo gp6 float-polaroid-6 photo-fade photo-fade-6">
+                    <div class="tape top-center"></div>
+                    <img src="assets/photos/photo11.jpeg" alt="Gallery Photo 6" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80'">
+                    <div class="caption">forever & always</div>
+                </div>
+            </div>
+
+            <!-- Standard HTML Anchor Link Navigation -->
+            <div style="margin-top: 2.5rem; z-index: 20;" class="anim-fade-up stagger-10">
+                <a href="slide5.html" class="next-btn">next &gt;&gt;</a>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

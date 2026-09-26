@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Boyfriend | Slide 2</title>
+    <meta name="description" content="Happy Boyfriend's Day digital scrapbook">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♡</text></svg>">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Scrapbook Transition Overlay -->
+    <div class="page-overlay"></div>
+
+    <!-- Subtle Floating Background Stars -->
+    <div id="floating-decorations" aria-hidden="true"></div>
+
+    <!-- Music Control Button -->
+    <button id="music-btn" title="Toggle Music" aria-label="Toggle background music">
+        <span class="music-icon">♫</span>
+    </button>
+    <audio id="bg-music" loop preload="auto">
+        <source src="assets/music/themetro.mp3" type="audio/mpeg">
+        <source src="assets/song.mp3" type="audio/mpeg">
+        <source src="assets/music/song.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Page Progress Badge -->
+    <div class="progress-badge" aria-label="Page progress">
+        2 / 7
+    </div>
+
+    <!-- Sparkle Container -->
+    <div id="sparkle-container" aria-hidden="true"></div>
+
+    <!-- Main Content Container -->
+    <div class="page-container">
+        <main class="slide2-container">
+
+            <!-- Left Column: Polaroid & Scrapbook Details -->
+            <div class="slide2-left anim-fade-up stagger-1">
+
+                <!-- Decorative Card Backing -->
+                <div class="paper-card" style="position: absolute; width: 100%; height: 105%; transform: rotate(-2.5deg); z-index: 1; opacity: 0.7; background: #fff5b8;"></div>
+
+                <!-- Floating Polaroid Photo Frame -->
+                <div class="polaroid polaroid-slide2 float-polaroid-1" style="z-index: 2;">
+                    <!-- Washi Tape -->
+                    <div class="tape top-left"></div>
+                    <div class="tape top-right"></div>
+                    
+                    <!-- SVG Wax Seal with Shimmer -->
+                    <div class="wax-seal" style="bottom: -15px; right: -15px;">
+                        <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    </div>
+
+                    <img src="assets/photos/photo1.jpeg" alt="Best Boyfriend Photo" onerror="this.src='https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80'">
+                    <div class="caption">my fav photo</div>
+                </div>
+
+                <!-- Hand-drawn SVG Arrow Doodle with Draw Animation -->
+                <svg class="decor-doodle arrow-doodle" style="bottom: -20px; left: -10px; width: 60px; height: 30px;" viewBox="0 0 60 30" fill="none" stroke="var(--dark-pink)" stroke-width="1.5" stroke-linecap="round">
+                    <path d="M5 25 Q 30 5, 50 15 M 42 8 L 52 15 L 45 22"/>
+                </svg>
+
+                <div class="decor-doodle star-4pt" style="top: -15px; left: 10px; width: 14px; height: 14px;"></div>
+            </div>
+
+            <!-- Right Column: Title & Next Link -->
+            <div class="slide2-right">
+                <h1 class="heading-best-boyfriend anim-fade-up stagger-2">
+                    Best<br>Boyfriend
+                </h1>
+
+                <div class="note-card anim-fade-up stagger-3">
+                    <p style="margin-bottom: 0.4rem;">"The sweetest, kindest, and most amazing person."</p>
+                    <p style="font-size: 1.2rem; color: var(--rose);">— so grateful to have you</p>
+                </div>
+
+                <!-- Standard HTML Anchor Link Navigation -->
+                <div class="anim-fade-up stagger-4">
+                    <a href="slide3.html" class="next-btn">next &gt;&gt;</a>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

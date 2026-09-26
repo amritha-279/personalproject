@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Boyfriend's Day | Introduction</title>
+    <meta name="description" content="Happy Boyfriend's Day digital scrapbook">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♡</text></svg>">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Scrapbook Transition Overlay -->
+    <div class="page-overlay"></div>
+
+    <!-- Subtle Floating Background Stars -->
+    <div id="floating-decorations" aria-hidden="true"></div>
+
+    <!-- Music Control Button & Hint -->
+    <div id="music-hint">click here for a surprise ➔</div>
+    <button id="music-btn" title="Toggle Music" aria-label="Toggle background music">
+        <span class="music-icon">♫</span>
+    </button>
+    <audio id="bg-music" loop preload="auto">
+        <source src="assets/music/themetro.mp3" type="audio/mpeg">
+        <source src="assets/song.mp3" type="audio/mpeg">
+        <source src="assets/music/song.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Page Progress Badge -->
+    <div class="progress-badge" aria-label="Page progress">
+        1 / 7
+    </div>
+
+    <!-- Sparkle Container -->
+    <div id="sparkle-container" aria-hidden="true"></div>
+
+    <!-- Main Content Container -->
+    <div class="page-container">
+        <main class="slide1-wrapper">
+
+            <div class="flower-blob-container anim-fade-up stagger-1">
+                <!-- Breathing Pastel Pink Blob -->
+                <div class="flower-blob" aria-hidden="true"></div>
+
+                <!-- Minimal Handmade CSS 4-Point Stars -->
+                <div class="decor-doodle star-4pt" style="top: -5px; left: 15%; width: 14px; height: 14px;"></div>
+                <div class="decor-doodle star-4pt" style="top: 25%; right: 5%; width: 18px; height: 18px;"></div>
+                <div class="decor-doodle star-4pt" style="bottom: 15%; left: 8%; width: 12px; height: 12px;"></div>
+                <div class="decor-doodle star-4pt" style="bottom: -10px; right: 20%; width: 16px; height: 16px;"></div>
+
+                <!-- Floating Heading Text -->
+                <h1 class="main-title">
+                    <span class="title-line title-happy anim-fade-up stagger-2">happy</span>
+                    <span class="title-line title-boyfriends anim-fade-up stagger-3">boyfriend's</span>
+                    <span class="title-line title-day anim-fade-up stagger-4">day</span>
+                </h1>
+            </div>
+
+            <!-- Standard HTML Anchor Link Navigation -->
+            <div class="anim-fade-up stagger-5">
+                <a href="slide2.html" class="next-btn">next &gt;&gt;</a>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
