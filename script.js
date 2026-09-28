@@ -112,36 +112,95 @@ function initPageTransitions() {
 function initMusicPlayer() {
     const musicBtn = document.getElementById('music-btn');
     const bgMusic = document.getElementById('bg-music');
+    const musicHint = document.getElementById('music-hint');
 
     if (!musicBtn || !bgMusic) return;
 
-    // Restore playing state (but NOT time — always play from start)
-    const isPlaying = localStorage.getItem('bgMusicPlaying') === 'true';
-
-    if (isPlaying) {
-        bgMusic.currentTime = 0;
-        bgMusic.play().then(() => {
+    function updateUI(playing) {
+        if (playing) {
             musicBtn.classList.add('playing');
-        }).catch((err) => {
-            console.log('Autoplay policy waiting for user interaction:', err);
+            const hint = document.getElementById('music-hint');
+            if (hint) hint.classList.add('hidden');
+        } else {
             musicBtn.classList.remove('playing');
+        }
+    }
+
+    function playAudio() {
+        return bgMusic.play().then(() => {
+            localStorage.setItem('bgMusicPlaying', 'true');
+            updateUI(true);
+        }).catch((err) => {
+            console.log('Audio playback waiting for user gesture or error:', err);
+            updateUI(false);
         });
     }
 
-    // Toggle Play/Pause — always restart from beginning on each click
+    function pauseAudio() {
+        bgMusic.pause();
+        localStorage.setItem('bgMusicPlaying', 'false');
+        updateUI(false);
+    }
+
+    function toggleAudio() {
+        if (bgMusic.paused) {
+            playAudio();
+        } else {
+            pauseAudio();
+        }
+    }
+
     musicBtn.addEventListener('click', (e) => {
         e.preventDefault();
+        e.stopPropagation();
+        toggleAudio();
+    });
+
+    if (musicHint) {
+        musicHint.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (bgMusic.paused) {
+                playAudio();
+            }
+        });
+    }
+
+    // Restore saved playback position if available
+    const savedTime = parseFloat(localStorage.getItem('bgMusicTime') || '0');
+    if (savedTime > 0 && isFinite(savedTime)) {
+        try {
+            bgMusic.currentTime = savedTime;
+        } catch (_) {}
+    }
+
+    // Check if music was playing previously
+    const wasPlaying = localStorage.getItem('bgMusicPlaying') === 'true';
+    if (wasPlaying) {
+        playAudio();
+    }
+
+    // Modern browsers require a user interaction (gesture) to start audio on deployed websites.
+    // If the browser blocked autoplay or if the user is visiting for the first time,
+    // start playing automatically on their first tap/click anywhere on the page
+    // (unless they explicitly paused the music previously).
+    const unlockOnFirstInteraction = () => {
+        if (localStorage.getItem('bgMusicPlaying') === 'false') {
+            return;
+        }
         if (bgMusic.paused) {
-            bgMusic.currentTime = 0;
-            bgMusic.play().then(() => {
-                localStorage.setItem('bgMusicPlaying', 'true');
-                musicBtn.classList.add('playing');
-            }).catch(err => console.log('Audio error:', err));
-        } else {
-            bgMusic.pause();
-            bgMusic.currentTime = 0;
-            localStorage.setItem('bgMusicPlaying', 'false');
-            musicBtn.classList.remove('playing');
+            playAudio();
+        }
+    };
+
+    window.addEventListener('click', unlockOnFirstInteraction, { once: true });
+    window.addEventListener('touchstart', unlockOnFirstInteraction, { once: true, passive: true });
+    window.addEventListener('keydown', unlockOnFirstInteraction, { once: true });
+
+    // Save playing state and timestamp
+    bgMusic.addEventListener('timeupdate', () => {
+        if (!bgMusic.paused) {
+            localStorage.setItem('bgMusicTime', bgMusic.currentTime.toString());
         }
     });
 
@@ -154,6 +213,7 @@ function saveMusicState() {
     const bgMusic = document.getElementById('bg-music');
     if (bgMusic && !bgMusic.paused) {
         localStorage.setItem('bgMusicPlaying', 'true');
+        localStorage.setItem('bgMusicTime', bgMusic.currentTime.toString());
     }
 }
 

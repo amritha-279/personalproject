@@ -143,8 +143,17 @@ body.page-exiting .page-container {
     font-size: 1.4rem;
     color: var(--dark-pink);
     z-index: 99;
-    pointer-events: none;
+    pointer-events: auto;
+    cursor: pointer;
+    user-select: none;
     animation: hintFloat 1.5s ease-in-out infinite alternate;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+#music-hint.hidden {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
 }
 
 @keyframes hintFloat {
