@@ -127,13 +127,20 @@ function initMusicPlayer() {
     }
 
     function playAudio() {
-        return bgMusic.play().then(() => {
-            localStorage.setItem('bgMusicPlaying', 'true');
-            updateUI(true);
-        }).catch((err) => {
-            console.log('Audio playback waiting for user gesture or error:', err);
-            updateUI(false);
-        });
+        if (bgMusic.networkState === HTMLMediaElement.NETWORK_EMPTY) {
+            bgMusic.load();
+        }
+        const playPromise = bgMusic.play();
+        if (playPromise !== undefined) {
+            return playPromise.then(() => {
+                localStorage.setItem('bgMusicPlaying', 'true');
+                updateUI(true);
+            }).catch((err) => {
+                console.log('Audio playback waiting for user touch:', err);
+                updateUI(false);
+            });
+        }
+        return Promise.resolve();
     }
 
     function pauseAudio() {
@@ -150,54 +157,50 @@ function initMusicPlayer() {
         }
     }
 
-    musicBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
+    // Touch & Click handler with debounce to guarantee immediate response on mobile & desktop
+    let lastActionTime = 0;
+    function handleTouchTrigger(e) {
+        const now = Date.now();
+        if (now - lastActionTime < 350) return; // Prevent double-triggering from touch+click
+        lastActionTime = now;
+
+        if (e && e.cancelable && e.type !== 'click') {
+            e.preventDefault();
+        }
         toggleAudio();
-    });
+    }
+
+    musicBtn.addEventListener('click', handleTouchTrigger);
+    musicBtn.addEventListener('touchend', handleTouchTrigger);
 
     if (musicHint) {
-        musicHint.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            if (bgMusic.paused) {
-                playAudio();
-            }
-        });
+        musicHint.addEventListener('click', handleTouchTrigger);
+        musicHint.addEventListener('touchend', handleTouchTrigger);
     }
 
-    // Restore saved playback position if available
-    const savedTime = parseFloat(localStorage.getItem('bgMusicTime') || '0');
-    if (savedTime > 0 && isFinite(savedTime)) {
-        try {
-            bgMusic.currentTime = savedTime;
-        } catch (_) {}
+    // Restore saved playback position once audio metadata is ready
+    function applySavedTime() {
+        const savedTime = parseFloat(localStorage.getItem('bgMusicTime') || '0');
+        if (savedTime > 0 && isFinite(savedTime) && bgMusic.duration && savedTime < bgMusic.duration) {
+            try {
+                bgMusic.currentTime = savedTime;
+            } catch (_) {}
+        }
     }
 
-    // Check if music was playing previously
+    if (bgMusic.readyState >= 1) {
+        applySavedTime();
+    } else {
+        bgMusic.addEventListener('loadedmetadata', applySavedTime, { once: true });
+    }
+
+    // If the user ALREADY turned music on in a previous slide or session, try to resume
     const wasPlaying = localStorage.getItem('bgMusicPlaying') === 'true';
     if (wasPlaying) {
         playAudio();
     }
 
-    // Modern browsers require a user interaction (gesture) to start audio on deployed websites.
-    // If the browser blocked autoplay or if the user is visiting for the first time,
-    // start playing automatically on their first tap/click anywhere on the page
-    // (unless they explicitly paused the music previously).
-    const unlockOnFirstInteraction = () => {
-        if (localStorage.getItem('bgMusicPlaying') === 'false') {
-            return;
-        }
-        if (bgMusic.paused) {
-            playAudio();
-        }
-    };
-
-    window.addEventListener('click', unlockOnFirstInteraction, { once: true });
-    window.addEventListener('touchstart', unlockOnFirstInteraction, { once: true, passive: true });
-    window.addEventListener('keydown', unlockOnFirstInteraction, { once: true });
-
-    // Save playing state and timestamp
+    // Save playing state and timestamp continuously
     bgMusic.addEventListener('timeupdate', () => {
         if (!bgMusic.paused) {
             localStorage.setItem('bgMusicTime', bgMusic.currentTime.toString());
