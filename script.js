@@ -126,9 +126,14 @@ function initMusicPlayer() {
         }
     }
 
-    function playAudio() {
+    function playAudio(startFromBeginning = true) {
         if (bgMusic.networkState === HTMLMediaElement.NETWORK_EMPTY) {
             bgMusic.load();
+        }
+        if (startFromBeginning) {
+            try {
+                bgMusic.currentTime = 0;
+            } catch (_) {}
         }
         const playPromise = bgMusic.play();
         if (playPromise !== undefined) {
@@ -151,7 +156,7 @@ function initMusicPlayer() {
 
     function toggleAudio() {
         if (bgMusic.paused) {
-            playAudio();
+            playAudio(true);
         } else {
             pauseAudio();
         }
@@ -178,34 +183,14 @@ function initMusicPlayer() {
         musicHint.addEventListener('touchend', handleTouchTrigger);
     }
 
-    // Restore saved playback position once audio metadata is ready
-    function applySavedTime() {
-        const savedTime = parseFloat(localStorage.getItem('bgMusicTime') || '0');
-        if (savedTime > 0 && isFinite(savedTime) && bgMusic.duration && savedTime < bgMusic.duration) {
-            try {
-                bgMusic.currentTime = savedTime;
-            } catch (_) {}
-        }
-    }
-
-    if (bgMusic.readyState >= 1) {
-        applySavedTime();
-    } else {
-        bgMusic.addEventListener('loadedmetadata', applySavedTime, { once: true });
-    }
+    // Clear obsolete saved time if present
+    localStorage.removeItem('bgMusicTime');
 
     // If the user ALREADY turned music on in a previous slide or session, try to resume
     const wasPlaying = localStorage.getItem('bgMusicPlaying') === 'true';
     if (wasPlaying) {
-        playAudio();
+        playAudio(false);
     }
-
-    // Save playing state and timestamp continuously
-    bgMusic.addEventListener('timeupdate', () => {
-        if (!bgMusic.paused) {
-            localStorage.setItem('bgMusicTime', bgMusic.currentTime.toString());
-        }
-    });
 
     // Save playing state on unload
     window.addEventListener('beforeunload', saveMusicState);
@@ -216,7 +201,6 @@ function saveMusicState() {
     const bgMusic = document.getElementById('bg-music');
     if (bgMusic && !bgMusic.paused) {
         localStorage.setItem('bgMusicPlaying', 'true');
-        localStorage.setItem('bgMusicTime', bgMusic.currentTime.toString());
     }
 }
 
