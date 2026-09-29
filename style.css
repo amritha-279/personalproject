@@ -270,7 +270,54 @@ body.page-exiting .page-container {
     top: 0; left: 0;
     width: 100%; height: 100%;
     pointer-events: none;
-    z-index: 99;
+    z-index: 9998;
+}
+
+.cursor-follower {
+    position: fixed;
+    top: 0; left: 0;
+    width: 22px; height: 22px;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.05s ease-out;
+    filter: drop-shadow(0 0 6px rgba(255, 77, 121, 0.9)) drop-shadow(0 0 14px rgba(255, 130, 180, 0.7));
+    animation: cursorHeartGlow 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes cursorHeartGlow {
+    0% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(255, 77, 121, 0.85)) drop-shadow(0 0 12px rgba(255, 130, 180, 0.6)); }
+    100% { transform: scale(1.15); filter: drop-shadow(0 0 9px rgba(255, 60, 110, 0.95)) drop-shadow(0 0 20px rgba(255, 100, 160, 0.85)); }
+}
+
+.sparkle-trail {
+    position: absolute;
+    pointer-events: none;
+    user-select: none;
+    z-index: 9997;
+    animation: trailParticleAnim 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    will-change: transform, opacity;
+}
+
+.sparkle-trail.trail-star {
+    clip-path: polygon(50% 0%, 63% 37%, 100% 50%, 63% 63%, 50% 100%, 37% 63%, 0% 50%, 37% 37%);
+}
+
+.sparkle-trail.trail-dot {
+    border-radius: 50%;
+}
+
+@keyframes trailParticleAnim {
+    0% {
+        transform: translate(-50%, -50%) scale(0.6) rotate(0deg);
+        opacity: 0.95;
+    }
+    50% {
+        opacity: 0.85;
+    }
+    100% {
+        transform: translate(-50%, calc(-50% + 22px)) scale(1.35) rotate(35deg);
+        opacity: 0;
+    }
 }
 
 .sparkle-dot {

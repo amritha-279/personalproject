@@ -205,11 +205,51 @@ function saveMusicState() {
 }
 
 /* ============================================================
-   CLICK SPARKLES
+   CLICK & CURSOR MOVEMENT SPARKLE TRAIL
    ============================================================ */
 function initSparkles() {
-    const sparkleContainer = document.getElementById('sparkle-container');
-    if (!sparkleContainer) return;
+    let sparkleContainer = document.getElementById('sparkle-container');
+    if (!sparkleContainer) {
+        sparkleContainer = document.createElement('div');
+        sparkleContainer.id = 'sparkle-container';
+        document.body.appendChild(sparkleContainer);
+    }
+
+    let cursorFollower = document.querySelector('.cursor-follower');
+    if (!cursorFollower) {
+        cursorFollower = document.createElement('div');
+        cursorFollower.className = 'cursor-follower';
+        cursorFollower.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#ff4d79"/></svg>`;
+        document.body.appendChild(cursorFollower);
+    }
+
+    let lastX = 0;
+    let lastY = 0;
+    let lastTime = 0;
+
+    function handleMove(x, y) {
+        cursorFollower.style.transform = `translate3d(${x - 11}px, ${y - 11}px, 0)`;
+
+        const now = Date.now();
+        const dist = Math.hypot(x - lastX, y - lastY);
+
+        if (dist > 12 || now - lastTime > 45) {
+            createTrailParticle(x, y);
+            lastX = x;
+            lastY = y;
+            lastTime = now;
+        }
+    }
+
+    document.addEventListener('mousemove', (e) => {
+        handleMove(e.clientX, e.clientY);
+    });
+
+    document.addEventListener('touchmove', (e) => {
+        if (e.touches && e.touches[0]) {
+            handleMove(e.touches[0].clientX, e.touches[0].clientY);
+        }
+    }, { passive: true });
 
     document.addEventListener('click', (e) => {
         if (e.target.closest('button, a, input')) return;
@@ -217,20 +257,48 @@ function initSparkles() {
     });
 }
 
-const sparkleColors = ['#f5a0b8', '#ffe566', '#98e4b0', '#d4a8f0', '#ff85a5', '#ffb3cc'];
+const sparkleColors = ['#ff7597', '#ffe566', '#98e4b0', '#d4a8f0', '#ff85a5', '#ffb3cc', '#70d6ff', '#ff9ebb'];
+
+function createTrailParticle(x, y) {
+    const container = document.getElementById('sparkle-container');
+    if (!container) return;
+
+    const particle = document.createElement('div');
+    const isStar = Math.random() > 0.45;
+    particle.className = `sparkle-trail ${isStar ? 'trail-star' : 'trail-dot'}`;
+
+    const color = sparkleColors[Math.floor(Math.random() * sparkleColors.length)];
+    const offsetX = (Math.random() - 0.5) * 12;
+    const offsetY = (Math.random() - 0.5) * 12;
+
+    particle.style.left = `${x + offsetX}px`;
+    particle.style.top = `${y + offsetY}px`;
+
+    const size = isStar ? Math.random() * 8 + 6 : Math.random() * 5 + 4;
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+    particle.style.background = color;
+    particle.style.boxShadow = `0 0 10px ${color}`;
+
+    container.appendChild(particle);
+
+    setTimeout(() => {
+        particle.remove();
+    }, 750);
+}
 
 function createSparkleBurst(x, y) {
     const sparkleContainer = document.getElementById('sparkle-container');
     if (!sparkleContainer) return;
 
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 8; i++) {
         const particle = document.createElement('div');
         particle.className = 'sparkle-dot';
 
-        const offsetX = (Math.random() - 0.5) * 36;
-        const offsetY = (Math.random() - 0.5) * 36;
+        const offsetX = (Math.random() - 0.5) * 40;
+        const offsetY = (Math.random() - 0.5) * 40;
         const color = sparkleColors[Math.floor(Math.random() * sparkleColors.length)];
-        const size = Math.random() * 4 + 4;
+        const size = Math.random() * 5 + 4;
 
         particle.style.left = `${x + offsetX}px`;
         particle.style.top = `${y + offsetY}px`;
